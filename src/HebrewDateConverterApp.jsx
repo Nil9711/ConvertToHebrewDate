@@ -4,6 +4,8 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { langActions } from "./store/lang";
 
 const useStyles = makeStyles((theme) => ({
   buttonsArea: {
@@ -28,6 +30,12 @@ function HebrewDateConverterApp() {
   const [hebrewDate, setHebrewDate] = useState("");
   const url = "https://www.hebcal.com/converter?cfg=json&";
   const classes = useStyles();
+  const isEnglish = useSelector((state) => state.language.isEnglish);
+  const dispatch = useDispatch();
+  const switchLang = () => {
+    console.log(isEnglish);
+    dispatch(langActions.switchLang());
+  };
 
   const getHebrewDate = (e) => {
     e.preventDefault();
@@ -41,9 +49,15 @@ function HebrewDateConverterApp() {
   };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      {isEnglish ? (
+        <h1>Hebrew Date Calculator </h1>
+      ) : (
+        <h1>מחשבון תאריך עברי</h1>
+      )}
+      <button onClick={switchLang}>Change</button>
       <form onSubmit={getHebrewDate}>
         <DatePicker
-          label="Enter date to convert"
+          label="הזן תאריך לועזי"
           value={selectedDate}
           onChange={handleDateChange}
           format="dd/MM/yyyy"
@@ -56,7 +70,7 @@ function HebrewDateConverterApp() {
             variant="contained"
             color="primary"
           >
-            Get Date
+            חשב תאריך עברי
           </Button>
         </div>
       </form>

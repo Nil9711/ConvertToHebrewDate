@@ -3,11 +3,16 @@ import App from "./App.jsx";
 import DateFnsUtils from "@date-io/date-fns";
 import { render } from "react-dom";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { Provider } from "react-redux";
+import store from "./store/index";
+
 import "./App.css";
 
 render(
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </MuiPickersUtilsProvider>,
-  document.querySelector("#root")
+  document.getElementById("root")
 );

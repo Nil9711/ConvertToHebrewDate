@@ -1,12 +1,12 @@
 import "./App.css";
 import HebrewDateConverterApp from "./HebrewDateConverterApp";
+import Paper from "./Paper";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hebrew Date Converter</h1>
+    <Paper className="App">
       <HebrewDateConverterApp />
-    </div>
+    </Paper>
   );
 }
 
